@@ -27,6 +27,7 @@ Before running this project, ensure you have the following installed:
 2. **Install dependencies:**
    ```bash
    npm install
+   ```
 
 3. **Set up Environment Variables:**
     PORT=5000
@@ -42,18 +43,19 @@ To quickly test the API, you can populate the database with 5 sample alerts usin
 
     ```bash
     npm run seed
+    ```
 
 
 # 💻 Running the Server
 
-Development Mode (auto-reloads on file changes):
+**Development Mode (auto-reloads on file changes):**
     ```bash
     npm run seed
-
-Production Mode:
+    ```
+**Production Mode:**
     ```bash
     npm start
-
+    ```
 The server will start on http://localhost:5000 (or your configured port).
 
 
