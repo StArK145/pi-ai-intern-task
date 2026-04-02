@@ -88,3 +88,39 @@ export const deleteAlert = async (req, res) => {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
+
+
+
+export const getAlertSummary = async (req, res) => {
+  try {
+    const summary = await Alert.aggregate([
+      {
+        // $group acts like SQL GROUP BY. 
+        // We group by a composite ID containing both status and severity.
+        $group: {
+          _id: { 
+            status: '$status', 
+            severity: '$severity' 
+          },
+          count: { $sum: 1 } // Adds 1 for every document that matches this group
+        }
+      },
+      {
+        // Optional formatting step to clean up the output structure
+        $project: {
+          _id: 0, // Hide the default _id
+          status: '$_id.status',
+          severity: '$_id.severity',
+          count: 1
+        }
+      },
+      {
+        $sort: { status: 1, severity: 1 } // Sort alphabetically
+      }
+    ]);
+
+    res.status(200).json(summary);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};
