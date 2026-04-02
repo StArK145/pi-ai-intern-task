@@ -40,19 +40,19 @@ To quickly test the API, you can populate the database with 5 sample alerts usin
 
 > **Warning:** This will wipe any existing alerts in the database.
 
-```bash
-npm run seed
+    ```bash
+    npm run seed
 
 
 # 💻 Running the Server
 
 Development Mode (auto-reloads on file changes):
-```bash
-npm run seed
+    ```bash
+    npm run seed
 
 Production Mode:
-```bash
-npm start
+    ```bash
+    npm start
 
 The server will start on http://localhost:5000 (or your configured port).
 

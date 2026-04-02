@@ -1,0 +1,196 @@
+{
+	"info": {
+		"name": "Pipeline Alerts API",
+		"description": "Postman collection for the Pipeline Alert Management REST API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create a New Alert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pipeline_segment\": \"Texas-South-42\",\n    \"detection_method\": \"Method 1\",\n    \"alert_type\": \"leak\",\n    \"severity\": \"high\",\n    \"location_km\": 88.5,\n    \"status\": \"active\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/alerts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts"
+					]
+				}
+			}
+		},
+		{
+			"name": "2. Get All Alerts (No Filters)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/alerts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts"
+					]
+				}
+			}
+		},
+		{
+			"name": "3. Get Alerts (Filtered & Paginated)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/alerts?status=active&alert_type=leak&page=1&limit=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "active"
+						},
+						{
+							"key": "alert_type",
+							"value": "leak"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "4. Get Alert Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/alerts/summary",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts",
+						"summary"
+					]
+				}
+			}
+		},
+		{
+			"name": "6. Get Specific Alert by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/alerts/REPLACE_WITH_ACTUAL_ID",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts",
+						"REPLACE_WITH_ACTUAL_ID"
+					]
+				}
+			}
+		},
+		{
+			"name": "7. Update an Alert",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"investigating\",\n    \"severity\": \"medium\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/alerts/REPLACE_WITH_ACTUAL_ID",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts",
+						"REPLACE_WITH_ACTUAL_ID"
+					]
+				}
+			}
+		},
+		{
+			"name": "8. Delete an Alert",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/alerts/REPLACE_WITH_ACTUAL_ID",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts",
+						"REPLACE_WITH_ACTUAL_ID"
+					]
+				}
+			}
+		},
+		{
+			"name": "9. Test Validation Error (Bonus)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pipeline_segment\": \"\",\n    \"detection_method\": \"Invalid Method\",\n    \"alert_type\": \"explosion\",\n    \"severity\": \"critical\",\n    \"location_km\": -50,\n    \"status\": \"ignored\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/alerts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"alerts"
+					]
+				}
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}
