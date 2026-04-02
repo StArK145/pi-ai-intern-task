@@ -1,24 +1,22 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js'; 
+import alertRoutes from './routes/alertRoutes.js';
 
-// Load environment variables
 dotenv.config();
 
-// Connect to Database
 connectDB();
 
 const app = express();
 
-// Middleware to parse incoming JSON payloads
+
 app.use(express.json());
 
-// Basic health check route
 app.get('/', (req, res) => {
   res.send('Pipeline Alerts API is running...');
 });
 
-
+app.use('/alerts', alertRoutes);
 
 const PORT = process.env.PORT || 5000;
 
