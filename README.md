@@ -83,3 +83,30 @@ The server will start on http://localhost:5000 (or your configured port).
 |--------|----------|-------------|
 | GET | `/alerts/summary` | Returns a count of alerts grouped by status and severity. |
 
+
+
+## 🧪 Testing with Postman
+
+A pre-configured Postman collection is included in this repository to easily test all endpoints, including data validation and dynamic database IDs.
+
+### 1. Import the Collection
+1. Open the Postman application.
+2. Click the **Import** button (usually located in the top-left area of the workspace).
+3. Select or drag-and-drop the `Pipeline_Alerts_API.postman_collection.json` file located in the root directory of this project.
+
+### 2. Configuration (Base URL Variable)
+This collection uses a built-in variable to manage the server address, so you don't have to type it manually for every request.
+* By default, the `{{baseUrl}}` variable is set to `http://localhost:5000`. 
+* **If your server runs on a different port:** Click on the **Pipeline Alerts API** collection folder on the left sidebar, navigate to the **Variables** tab, update the `baseUrl` value to match your port, and click **Save**.
+
+### 3. How to Test Dynamic Routes
+Routes like `GET by ID`, `PUT`, and `DELETE` require a real database ID to work. To test these:
+1. Run the **"2. Get All Alerts (No Filters)"** request.
+2. Look at the response data and copy an `id` string (e.g., `"662a5b9f9c..."`).
+3. Open the specific request you want to test (e.g., **"7. Update an Alert"**).
+4. In the URL bar, highlight `REPLACE_WITH_ACTUAL_ID` and paste your copied ID.
+5. Hit **Send**.
+
+### 4. Testing Validation
+Run the **"9. Test Validation Error (Bonus)"** request to see the Express-Validator middleware in action. It will intentionally send an empty and incorrectly formatted payload to trigger a `400 Bad Request` and return an array of specific error messages.
+
